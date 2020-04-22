@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                          xmlns:tt="clr-namespace:TouchTracking"
+                          xmlns:cp="clr-namespace:Amporis.Xamarin.Forms.ColorPicker;assembly=Amporis.Xamarin.Forms.ColorPicker"
+             ios:Page.UseSafeArea="true"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SkiaLife.GamePage">
+    <ContentPage.Content>
+        <Grid x:Name="OuterGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85*" />
+                <RowDefinition Height="15*" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <skia:SKCanvasView x:Name="GameGrid" PaintSurface="GameGrid_PaintSurface" BackgroundColor="{Binding BGColor}" />
+                <Grid.Effects>
+                    <tt:TouchEffect Capture="True"
+                            TouchAction="TouchEffect_TouchAction" />
+                </Grid.Effects>
+            </Grid>
+            <Grid Grid.Row="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="33*" />
+                    <RowDefinition Height="33*" />
+                    <RowDefinition Height="33*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="33*" />
+                    <ColumnDefinition Width="33*" />
+                    <ColumnDefinition Width="33*" />
+
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" VerticalTextAlignment="Center" Text="{Binding Generation, StringFormat='Generation: {0}'}" />
+                <Slider Grid.Row="0" Grid.Column="2" WidthRequest="100" Value="{Binding Time}"  Maximum="10" Minimum="1"  />
+                <Button Grid.Row="1" Grid.Column="0" Text="{Binding ButtonText}" Clicked="Start_Clicked" />
+                <Button Grid.Row="1" Grid.Column="1" Text="Next" Clicked="Next_Clicked" IsEnabled="{Binding Paused}" />
+
+                <Button Grid.Row="1" Grid.Column="2" Text="Clear" Clicked="Clear_Clicked" IsEnabled="{Binding Paused}" />
+
+                    <Button Clicked="BGClicked" Grid.Row="2" Grid.Column="0" BackgroundColor="{Binding BGColor}" Text="Background" TextColor="White" />
+                    <Button Clicked="GridClicked" Grid.Row="2" Grid.Column="1" BackgroundColor="{Binding GridColor}" Text="Grid" TextColor="White" />
+                    <Button Clicked="CellClicked" Grid.Row="2" Grid.Column="2" BackgroundColor="{Binding CellColor}" Text="Cell" TextColor="White" />
+                </Grid>
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
